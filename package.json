@@ -1,0 +1,16 @@
+{
+  "name": "rhythmgamemanger",
+  "version": "1.0.0",
+  "description": "A Score Manager to Track Scores",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chuck Van-Lare",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "create-react-app": "^5.0.1",
+    "rhythmgamemanger": "file:"
+  }
+}
