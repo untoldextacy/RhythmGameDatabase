@@ -19,9 +19,11 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://personal-sdvx-database.onrender.com'  // Production frontend URL
+    : 'http://localhost:3000', // Local frontend URL (React runs on 3000 by default)
   methods: 'GET,POST',
-  credentials: true, // Ensure cookies are sent with requests
+  credentials: true, // Allow credentials like cookies/session data to be sent
 };
 
 app.use(cors(corsOptions));

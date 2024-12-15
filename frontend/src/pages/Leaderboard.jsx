@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [userScore, setUserScore] = useState(null);
 
+  // Fetch the API URL based on environment (local or production)
+  const apiUrl = process.env.REACT_APP_API_URL; // This will use the URL based on your .env settings
+
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/scores/leaderboard');
-        console.log('Leaderboard Response', response.data)
+        // Use the apiUrl variable to dynamically change between local or production URL
+        const response = await axios.get(`${apiUrl}/api/scores/leaderboard`);
+        console.log('Leaderboard Response', response.data);
         setLeaderboard(response.data.leaderboard);
         setUserScore(response.data.userScore); // Set the logged-in user's score
       } catch (error) {
@@ -19,7 +23,7 @@ const Leaderboard = () => {
     };
 
     fetchLeaderboard();
-  }, []);
+  }, [apiUrl]); // Use apiUrl as a dependency to trigger re-fetch if the URL changes
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-800 via-indigo-600 to-purple-800 text-white flex flex-col items-center justify-center">
